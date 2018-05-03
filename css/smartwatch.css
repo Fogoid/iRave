@@ -89,3 +89,17 @@ span {
     left: 66%;
     right: 31%;
 }
+
+.buttoncancel {
+    background-color:red;
+    border-radius: 8px;
+    border:none;
+    color: white;
+    padding: 1px 5px;
+    text-align: center;
+    text-decoration: none;
+ 
+    font-size: 10px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

@@ -1,6 +1,8 @@
 var i = 0;
 var stackTo = new Array();
 var stackFrom = new Array();
+var functionIsRunning = false;
+var order=false;
 
 function goBack(){
 	var from = stackFrom.pop();
@@ -269,3 +271,63 @@ function changeEventZone(side){
 			document.getElementById("leftCircleEvent").src = "img/circle-full.png";
 		}
 }
+
+
+
+
+
+function playAudio() { 
+	var x = document.getElementById("myAudio");
+    x.play(); 
+} 
+var order=false;
+function pop() {
+	order=true;
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+
+
+function move() {
+
+
+		
+    	var elem = document.getElementById("myBar"); 
+    	var width = 1;
+    	
+    	var id = setInterval(frame, 50);
+    
+ 
+    	function frame() {
+        	if (width >= 100) {
+        		playAudio();
+        		pop();
+        		
+        		functionIsRunning = false;
+            	clearInterval(id);
+
+        	} else {
+            	width++; 
+            	elem.style.width = width + '%'; 
+            	elem.innerHTML = width * 1 + '%';
+        	}
+
+    	}
+    	
+ 	
+
+}
+
+
+
+function multiple(){
+    change('TakeAway', 'Progress', '1');
+
+    if(functionIsRunning !=true ){
+    	functionIsRunning = true;
+    	move();
+    	
+    }
+}
+
+

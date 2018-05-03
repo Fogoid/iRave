@@ -4,12 +4,20 @@
 		<link rel="stylesheet" type="text/css" href="css/smartwatch.css">
 		<link rel="stylesheet" type="text/css" href="css/w3.css">
 		<link rel="stylesheet" type="text/css" href="css/ConcertList.css">
+		<link rel="stylesheet" type="text/css" href="css/progressbar.css">
 		<script src="js/time.js"></script>
 		<script src="js/screenChange.js"></script>
 		<script src="js/changeImage.js"></script>
+		<script src="js/fastFood.js"></script>
+		
+
 	</head>
 
 	<body onload="startTime()" >
+		<audio id="myAudio">
+  				<source src="img/stairs.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
+		</audio>
 		<div class="w3-cell backbotton" >
 			<button style="width:100%; height:100%; border:0; background-color: #ccc" onclick="goBack()">
 			</button>
@@ -324,13 +332,119 @@
 
 
                 <!-- Finder Functionality -->
-                <div id="Finder" class="w3-cell-row w3-display-container" style="height:60%;">
+                <div id="Finder" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
 				</div>
 
 				<!-- TakeAway Functionality -->
-				<div id="TakeAway" class="w3-cell-row w3-display-container" style="height:60%;">
-						
+				<div id="TakeAway" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+                    <div class="w3-cell-row" style="width: 100%; height: 50%">
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+
+							<button class="w3-button w3-circle w3-orange w3-display-bottommiddle" style="background:url('img/burger.png') no-repeat center; width:32px; height:32px;"onclick="change('TakeAway', 'Food', '1')"></button>
+						</div>
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<button class="w3-button w3-circle w3-teal w3-display-bottommiddle" style="background:url('img/beer.png') no-repeat center; width:32px; height:32px;" onclick="change('TakeAway', 'OtherEvents', '1')"></button>
+						</div>
+					</div>
+
+					<div class="w3-cell-row" style="width: 100%; height: 30%">
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<span class="w3-display-topmiddle">Food</span>
+						</div>
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<span class="w3-display-topmiddle">Drinks</span>
+						</div>
+					</div>	
+
+					<div style="width:100%;height: 20%">
+		
+						<div style="width: 100%; height: 100%">
+
+							<button class="w3-button w3-display-bottomright " style="font-size: 11px;text-align:right ;color:cyan;opacity:0.5 "  onclick="multiple()"> Continuar</button>
+						</div>
+
+
+					</div>
+
 				</div>
+
+				<div class="w3-cell-row" id="Food" style="height: 85%;display: none">
+                    <div class="w3-cell-row" style="height:100%">
+                    	<div class="w3-cell-row" style="height:10%"> 
+                    		<p id="Food" style="font-size:11px;text-align: center;font-weight: bold ;color:orange; ">Menu</p>
+                    	</div>
+                    	<div class=" foodclsScroll" style="height:90% width:110%">
+							<div class="w3-cell-row" id="1menu">
+	  							<div class="w3-cell" style="width: 60%; font-weight: bold ">
+	    							<p style="text-align: left">Bifana</p>
+	    							<p style="text-align: left">Burguer</p>
+	    							<p style="text-align: left">Cachorro</p>
+	    							<p style="text-align: left">Prato dia</p>
+	    							<p style="text-align: left">Especial</p>	    						                    	
+	    						</div>
+	  							<div class="w3-cell" style="width:40%">
+	  								<div class="w3-cell w3-display-container" style="width:15%">
+	  									<p style="text-align: center; color:orange; width:100%; border: 1px; border-color: white;" onclick="minusValue('Bifana')">-</p>
+                            			<p style="text-align: center; color:orange; width:100%; border: 1px; border-color: white;" onclick="minusValue('Burguer')">-</p>
+                                		<p style="text-align: center; color:orange; width: 100%; border: 1px; border-color: white;" onclick="minusValue('Cachorro')">-</p>
+                                		<p style="text-align: center; color:orange; width:100%; height: 20%; border: 1px; border-color: white;" onclick="minusValue('Prato Dia')">-</p>
+                                		<p style="text-align: center; color:orange; width:100%; height: 20%; border: 1px; border-color: white;" onclick="minusValue('Especial')">-</p>
+	  								</div>
+	  								<div class="w3-cell" style="width:10%">
+	  									<p id="Bifana" style="text-align: center">0</p>
+		    							<p id="Burguer" style="text-align: center">0</p>
+		    							<p id="Cachorro" style="text-align: center">0</p>
+		    							<p id="Prato Dia" style="text-align: center">0</p>
+		    							<p id="Especial" style="text-align: center">0</p>
+	  								</div>
+	  								<div class="w3-cell w3-display-container" style="width:15%">
+	  									<p style="text-align: center; color: orange" onclick="plusValue('Bifana')">+</p>
+                            			<p style="text-align: center; color: orange" onclick="plusValue('Burguer')">+</p>
+                                		<p style="text-align: center; color: orange" onclick="plusValue('Cachorro')">+</p>
+                                		<p style="text-align: center; color: orange" onclick="plusValue('Prato Dia')">+</p>
+                                		<p style="text-align: center; color: orange" onclick="plusValue('Especial')">+</p>
+	  								</div>
+	    							
+                    			</div>
+
+
+				</div>
+
+
+
+
+
+
+
+				<!--Final Step for order-->
+				<div class="w3-cell-row" id="Progress" style="height:85%;  display: none">
+                    <div class="w3-cell-row" style="width: 100%; height: 40%">
+						<div id="myProgress">
+  							<div id="myBar">10%</div>
+						</div>
+					</div>
+
+					<div class="popup" style="width: 100%; height: 40%">
+						<span class="popuptext" onclick="pop() "  id="myPopup">Food is Ready</span>
+
+						<span style="color: white; font-size: 11px ;text-align: left;"> Hora Prevista : </span>
+					</div>
+
+					<div style="width:100%;height: 20%">
+						<div style="width: 50%; height: 100%">
+							<button class=" w3-display-bottomleft  " style="font-size: 11px;text-align:left ;color:white;background-color:blue;border-radius: 5px  "  onclick="change('Progress', 'mainMenu', '1')"> MainMenu</button>
+						</div>
+						<!--<div style="width: 50%; height: 100%">
+							<button class=" w3-display-bottomright buttoncancel " style="font-size: 8px;text-align:left ;color:white; "  onclick="change('Progress', 'mainMenu', '1')"> cancel</button>
+						</div>-->
+
+
+					</div>					
+
+	
+                </div>
+
+
 			</div>
 
 		</div>
