@@ -1,12 +1,16 @@
 
+#myProgress{
+    width: 90%;
+    margin-left:5%;
+}
 
 #myBar {
     width: 10%;
-    height: 30px;
+    height: 20px;
     background-color: #33cc33;
     border-radius: 10px;
     text-align: center; /* To center it horizontally (if you want) */
-    line-height: 30px; /* To center it vertically */
+    line-height: 20px; /* To center it vertically */
     color: white; 
 }
 /* Popup container - can be anything you want */

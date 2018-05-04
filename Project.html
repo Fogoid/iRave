@@ -8,7 +8,7 @@
 		<script src="js/time.js"></script>
 		<script src="js/screenChange.js"></script>
 		<script src="js/changeImage.js"></script>
-		<script src="js/fastFood.js"></script>
+		
 		
 
 	</head>
@@ -112,7 +112,7 @@
 							<p align=middle class="w3-display-middle" style="width:100%">Receber Notificações</p>
 						</div>
 						<div class="w3-cell w3-display-container">
-							<input class="w3-display-middle" type="checkbox" id="myCheck" width="16">
+							<input class="w3-display-middle" type="checkbox" id="noteCheck" width="16" >
 						</div>
 					</div>
 				</div>
@@ -343,7 +343,7 @@
 							<button class="w3-button w3-circle w3-orange w3-display-bottommiddle" style="background:url('img/burger.png') no-repeat center; width:32px; height:32px;"onclick="change('TakeAway', 'Food', '1')"></button>
 						</div>
 						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
-							<button class="w3-button w3-circle w3-teal w3-display-bottommiddle" style="background:url('img/beer.png') no-repeat center; width:32px; height:32px;" onclick="change('TakeAway', 'OtherEvents', '1')"></button>
+							<button class="w3-button w3-circle w3-teal w3-display-bottommiddle" style="background:url('img/beer.png') no-repeat center; width:32px; height:32px;" onclick="change('TakeAway', 'Drinks', '1')"></button>
 						</div>
 					</div>
 
@@ -360,9 +360,62 @@
 		
 						<div style="width: 100%; height: 100%">
 
-							<button class="w3-button w3-display-bottomright " style="font-size: 11px;text-align:right ;color:cyan;opacity:0.5 "  onclick="multiple()"> Continuar</button>
+							<button class=" button_cont  w3-display-bottomright "  onclick="change('TakeAway', 'CheckOrder', '1')"> Continuar</button>
 						</div>
 
+
+					</div>
+
+				</div>
+
+				<div id="CheckOrder" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+                    <div class="w3-cell-row" style="width: 100%; height: 15%">
+						<div class="w3-cell w3-display-container" style="width: 30%; height: 100%">
+						</div>
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+						</div>
+					</div>
+
+					<div class="w3-cell-row" style="width: 100%; height: 50%">
+						<div class=" clsScroll" id="kek" style="height:120% width:110%">
+							<div class="w3-cell-row" id="description">
+	  							<div class="w3-cell" style="width: 65%; font-weight: bold; ">
+	    							<p id="carrinhoBifana" style="text-align: left; display: none">Bifana</p>
+	    							<p id="carrinhoBurguer" style="text-align: left; display: none">Burguer</p>
+	    							<p id="carrinhoCachorro" style="text-align: left; display: none">Cachorro</p>
+	    							<p id="carrinhoPrato Dia" style="text-align: left; display: none">Prato Dia</p>
+	    							<p id="carrinhoEspecial" style="text-align: left; display: none">Especial</p>
+	    							<p id="carrinhoÁgua" style="text-align: left; display: none">Água</p>
+	    							<p id="carrinhoCoca-Cola" style="text-align: left; display: none">Coca-Cola</p>
+	    							<p id="carrinhoSuperBock" style="text-align: left; display: none">SuperBock</p>
+	    							<p id="carrinhoIceTea" style="text-align: left; display: none">IceTea</p>
+	    							<p id="carrinho7-Up" style="text-align: left; display: none">7-Up</p>     						                    	
+	    						</div>
+	  							<div class="w3-cell" style="width:35%">
+	    							<p id="carrinhoBifanaQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoBurguerQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoCachorroQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoPrato DiaQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoEspecialQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoÁguaQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoCoca-ColaQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoSuperBockQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinhoIceTeaQt" style="text-align: left; display: none">0</p>
+	    							<p id="carrinho7-UpQt" style="text-align: left; display: none">0</p>
+
+                    			</div>
+                    		</div>
+                    	</div>
+					</div>		
+
+					<div class="w3-cell-row" style="width:100%;height: 20%">
+		
+						<div style="width: 50%; height: 100%">
+							<button id=! class="button_cont w3-display-bottomright "  onclick="multiple();"> Concluir</button>
+						</div>
+						<div style="width: 50%; height: 100%">
+							<button class=" w3-display-bottomleft buttoncancel "  onclick="change('CheckOrder', 'Verification', '0')"> cancel</button>
+						</div>
 
 					</div>
 
@@ -373,8 +426,8 @@
                     	<div class="w3-cell-row" style="height:10%"> 
                     		<p id="Food" style="font-size:11px;text-align: center;font-weight: bold ;color:orange; ">Menu</p>
                     	</div>
-                    	<div class=" foodclsScroll" style="height:90% width:110%">
-							<div class="w3-cell-row" id="1menu">
+                    	<div class=" foodclsScroll" style="height:75% width:110%">
+							<div class="big w3-cell-row" id="1menu">
 	  							<div class="w3-cell" style="width: 60%; font-weight: bold ">
 	    							<p style="text-align: left">Bifana</p>
 	    							<p style="text-align: left">Burguer</p>
@@ -382,39 +435,87 @@
 	    							<p style="text-align: left">Prato dia</p>
 	    							<p style="text-align: left">Especial</p>	    						                    	
 	    						</div>
-	  							<div class="w3-cell" style="width:40%">
-	  								<div class="w3-cell w3-display-container" style="width:15%">
-	  									<p style="text-align: center; color:orange; width:100%; border: 1px; border-color: white;" onclick="minusValue('Bifana')">-</p>
-                            			<p style="text-align: center; color:orange; width:100%; border: 1px; border-color: white;" onclick="minusValue('Burguer')">-</p>
-                                		<p style="text-align: center; color:orange; width: 100%; border: 1px; border-color: white;" onclick="minusValue('Cachorro')">-</p>
-                                		<p style="text-align: center; color:orange; width:100%; height: 20%; border: 1px; border-color: white;" onclick="minusValue('Prato Dia')">-</p>
-                                		<p style="text-align: center; color:orange; width:100%; height: 20%; border: 1px; border-color: white;" onclick="minusValue('Especial')">-</p>
+	  							<div class="big w3-cell" style="width:40%">
+	  								<div class=" w3-cell w3-display-container" style="width:20%">
+	  									<p style="text-align: center; color:orange; width:100%; border: 1px; border-color: white;font-size: 20px" onclick="minusValue('Bifana')">-</p>
+                            			<p style="text-align: center; color:orange; width:100%; border: 1px; border-color: white;font-size: 20px" onclick="minusValue('Burguer')">-</p>
+                                		<p style="text-align: center; color:orange; width: 100%; border: 1px; border-color: white;font-size: 20px" onclick="minusValue('Cachorro')">-</p>
+                                		<p style="text-align: center; color:orange; width:100%; height: 20%; border: 1px; border-color: white;font-size: 20px" onclick="minusValue('Prato Dia')">-</p>
+                                		<p style="text-align: center; color:orange; width:100%; height: 20%; border: 1px; border-color: white;font-size: 20px" onclick="minusValue('Especial')">-</p>
 	  								</div>
-	  								<div class="w3-cell" style="width:10%">
-	  									<p id="Bifana" style="text-align: center">0</p>
-		    							<p id="Burguer" style="text-align: center">0</p>
-		    							<p id="Cachorro" style="text-align: center">0</p>
-		    							<p id="Prato Dia" style="text-align: center">0</p>
-		    							<p id="Especial" style="text-align: center">0</p>
+	  								<div class="w3-cell" style="width:20%">
+	  									<p id="Bifana" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="Burguer" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="Cachorro" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="Prato Dia" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="Especial" style="text-align: center;font-size: 15px">0</p>
 	  								</div>
-	  								<div class="w3-cell w3-display-container" style="width:15%">
-	  									<p style="text-align: center; color: orange" onclick="plusValue('Bifana')">+</p>
-                            			<p style="text-align: center; color: orange" onclick="plusValue('Burguer')">+</p>
-                                		<p style="text-align: center; color: orange" onclick="plusValue('Cachorro')">+</p>
-                                		<p style="text-align: center; color: orange" onclick="plusValue('Prato Dia')">+</p>
-                                		<p style="text-align: center; color: orange" onclick="plusValue('Especial')">+</p>
+	  								<div class="w3-cell w3-display-container" style="width:20%">
+	  									<p style="text-align: center; color: orange;font-size: 20px" onclick="plusValue('Bifana')">+</p>
+                            			<p style="text-align: center; color: orange;font-size: 20px" onclick="plusValue('Burguer')">+</p>
+                                		<p style="text-align: center; color: orange;font-size: 20px" onclick="plusValue('Cachorro')">+</p>
+                                		<p style="text-align: center; color: orange;font-size: 20px" onclick="plusValue('Prato Dia')">+</p>
+                                		<p style="text-align: center; color: orange;font-size: 20px" onclick="plusValue('Especial')">+</p>
 	  								</div>
-	    							
-                    			</div>
+	  							</div>
+	  						</div>
+	  					</div>
+                    	<div class="w3-cell-row" style="height:10%"> 
 
+								<button class="button_cont w3-display-bottomright "   onclick="change('Food','TakeAway','0')"> Continuar</button>
+							
+                    	</div>	    							
+                    			
+
+					</div>
 
 				</div>
 
+				<div class="w3-cell-row" id="Drinks" style="height: 85%;display: none">
+                    <div class="w3-cell-row" style="height:100%">
+                    	<div class="w3-cell-row" style="height:10%"> 
+                    		<p id="Food" style="font-size:11px;text-align: center;font-weight: bold ;color:cyan; ">Menu</p>
+                    	</div>
+                    	<div class=" foodclsScroll" style="height:75% width:110%">
+							<div class="big w3-cell-row" id="1menu">
+	  							<div class="w3-cell" style="width: 60%; font-weight: bold ">
+	    							<p style="text-align: left">Água</p>
+	    							<p style="text-align: left">Coca-Cola</p>
+	    							<p style="text-align: left">SuperBock</p>
+	    							<p style="text-align: left">IceTea</p>
+	    							<p style="text-align: left">7-Up</p>	    						                    	
+	    						</div>
+	  							<div class="big w3-cell" style="width:40%">
+	  								<div class="w3-cell w3-display-container" style="width:15%">
+	  									<p style="text-align: center; color:cyan; width:100%; border-color: white;font-size: 20px" onclick="minusValue('Água')">-</p>
+                            			<p style="text-align: center; color:cyan; width:100%; border-color: white;font-size: 20px" onclick="minusValue('Coca-Cola')">-</p>
+                                		<p style="text-align: center; color:cyan; width: 100%;  border-color: white;font-size: 20px" onclick="minusValue('SuperBock')">-</p>
+                                		<p style="text-align: center; color:cyan; width:100%;  border-color: white;font-size: 20px" onclick="minusValue('IceTea')">-</p>
+                                		<p style="text-align: center; color:cyan; width:100%;  border-color: white;font-size: 20px" onclick="minusValue('7-Up')">-</p>
+	  								</div>
+	  								<div class="w3-cell" style="width:10%">
+	  									<p id="Água" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="Coca-Cola" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="SuperBock" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="IceTea" style="text-align: center;font-size: 15px">0</p>
+		    							<p id="7-Up" style="text-align: center;font-size: 15px">0</p>
+	  								</div>
+	  								<div class="w3-cell w3-display-container" style="width:15%">
+	  									<p style="text-align: center; color: cyan;font-size: 20px" onclick="plusValue('Água')">+</p>
+                            			<p style="text-align: center; color: cyan;font-size: 20px" onclick="plusValue('Coca-Cola')">+</p>
+                                		<p style="text-align: center; color: cyan;font-size: 20px" onclick="plusValue('SuperBock')">+</p>
+                                		<p style="text-align: center; color: cyan;font-size: 20px" onclick="plusValue('IceTea')">+</p>
+                                		<p style="text-align: center; color: cyan;font-size: 20px" onclick="plusValue('7-Up')">+</p>
+	  								</div>
+	  							</div>
+	  						</div>
+	  					</div>
 
-
-
-
-
+                    	<div class="w3-cell-row" style="height:10%"> 
+								<button class="button_cont w3-display-bottomright "   onclick="change('Drinks','TakeAway','0')"> Continuar</button>	
+                    	</div>		    							
+					</div>			
+				</div>
 
 				<!--Final Step for order-->
 				<div class="w3-cell-row" id="Progress" style="height:85%;  display: none">
@@ -424,29 +525,49 @@
 						</div>
 					</div>
 
-					<div class="popup" style="width: 100%; height: 40%">
-						<span class="popuptext" onclick="pop() "  id="myPopup">Food is Ready</span>
-
-						<span style="color: white; font-size: 11px ;text-align: left;"> Hora Prevista : </span>
+					<div class="w3-cell-row popup" style="width: 100%; height: 40%">
+						<span class="popuptext" onclick="pop() " id="myPopup">Food is Ready</span>
+						<div class="w3-cell" style="width: 70%">
+							<p style="color: white; font-size: 11px ;text-align: left;"> Hora Prevista: </p>
+						</div>
+						<div class="w3 cell" >
+							<p id=ordertime> </p>
+						</div>
 					</div>
 
 					<div style="width:100%;height: 20%">
 						<div style="width: 50%; height: 100%">
-							<button class=" w3-display-bottomleft  " style="font-size: 11px;text-align:left ;color:white;background-color:blue;border-radius: 5px  "  onclick="change('Progress', 'mainMenu', '1')"> MainMenu</button>
+							<button class=" w3-display-bottomleft  " style="font-size: 11px;text-align:left ;color:white;background-color:blue;border:none;border-radius: 5px  "  onclick="change('Progress', 'mainMenu', '1')"> MainMenu</button>
 						</div>
-						<!--<div style="width: 50%; height: 100%">
-							<button class=" w3-display-bottomright buttoncancel " style="font-size: 8px;text-align:left ;color:white; "  onclick="change('Progress', 'mainMenu', '1')"> cancel</button>
-						</div>-->
-
-
 					</div>					
-
-	
+                </div>
+                <!-- verification--> 
+                <div class="w3-cell-row" id="Verification" style="height:85%;  display: none">
+                	<div class="w3-cell-row" style="width: 100%; height: 50%">
+                		<span style="color: white; font-size: 11px ;text-align: left;font-weight: bold; color: white">Pretende CANCELAR o pedido?</span>
+                	</div>  
+                	<div style="width:100%;height: 50%"> 
+                		<div style="width: 50%">
+                			<button class=" w3-display-bottomleft  " style="font-size: 11px;text-align:left ;color:white;background-color:green;border-radius: 5px ;border:none; "  onclick="change('Verification', 'mainMenu', '0')"> Sim</button>
+						</div>
+						<div style="width: 50%">
+                			<button class=" w3-display-bottomright  " style="font-size: 11px;text-align:right ;color:white;background-color:red;border-radius: 5px ; "  onclick="change('Verification', 'CheckOrder', '0')"> Não</button>
+						</div>
+                	</div>
+                </div>
+                <div class="w3-cell-row" id="Verify" style="height:85%;  display: none">
+                	<div class="w3-cell-row" style="width: 100%; height: 50%">
+                		<span style="color: white; font-size: 11px ;text-align: left;font-weight: bold; color: white">Pretende CANCELAR as alterações?</span>
+                	</div>  
+                	<div style="width:100%;height: 50%"> 
+                		<div style="width: 50%">
+                			<button class=" w3-display-bottomleft  " style="font-size: 11px;text-align:left ;color:white;background-color:green;border-radius: 5px ;border:none; "  onclick="change('Verify', 'TakeAway', '0')"> Sim</button>
+						</div>
+						<div style="width: 50%">
+                			<button class=" w3-display-bottomright  " style="font-size: 11px;text-align:right ;color:white;background-color:red;border-radius: 5px ; "  onclick="returnTo()"> Não</button>
+						</div>
+                	</div>
                 </div>
 
-
-			</div>
-
-		</div>
 	</body>
 </html>

@@ -95,11 +95,22 @@ span {
     border-radius: 8px;
     border:none;
     color: white;
-    padding: 1px 5px;
+    padding: 1px 6px;
     text-align: center;
     text-decoration: none;
- 
+    
     font-size: 10px;
     margin: 4px 2px;
     cursor: pointer;
 }
+.button_cont{
+    font-size: 11px;
+    text-align:left ;
+    color:white;
+    padding: 2px 8px;
+    background-color:green;
+    border-radius: 5px ;
+    border:none;
+}
+
+.big {line-height:25px;}

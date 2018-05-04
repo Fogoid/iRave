@@ -3,12 +3,31 @@ var stackTo = new Array();
 var stackFrom = new Array();
 var functionIsRunning = false;
 var order=false;
+var cols = document.getElementsByClassName('screen');
+var last;
+
+
+//fastFood functionality Vars
+var foodNames = [ "Bifana", "Burguer", "Cachorro", "Prato Dia", "Especial" ];
+var drinkNames = [ "Água", "Coca-Cola", "SuperBock", "IceTea", "7-Up" ];
+var foodValue = [ 0, 0, 0, 0, 0];
+var	drinkValue = [ 0, 0, 0, 0, 0];
+
+function returnTo(){
+	change('Verify', last, 0);
+	stackFrom.push(last);
+	stackTo.push(TakeAway);
+}
 
 function goBack(){
 	var from = stackFrom.pop();
 	var to = stackTo.pop();
 
-	change(from, to, '3');
+	if(from == "Drinks" || from == "Food"){
+		change(from, 'Verify', '1');
+		last = from;
+	}
+	else change(from, to, '3');
 }
 
 function insert(a, b){
@@ -34,6 +53,14 @@ function change(a, b, c){
 			document.getElementById("description").style.display = "block";
 			
 		}
+		if(a == 'Verification' || a == 'Progress'){
+			resetValues('Food');
+			resetValues('Drinks');
+			clearOrder();
+
+		}
+
+
 		document.getElementById("descriptionText").style.visibility = "hidden";
 	}
 	else {
@@ -49,7 +76,20 @@ function change(a, b, c){
 			document.getElementById("swipeLeft").onclick = function() { changeEventZone('right') };
 			document.getElementById("swipeRight").onclick = function() { changeEventZone('left') };
 			break;
+		case 'TakeAway':
+			if(a == 'Verify' && last == "Food"){
+				resetValues('Food');
+			}
+			if(a == 'Verify' && last == "Drinks")
+				resetValues('Drinks');
+			break;
+		case 'CheckOrder':
+			writeOrder();
+			break;
+	}
 
+	if(a == 'CheckOrder'){
+		clearOrder();
 	}
 
 	if(c == '1'){
@@ -130,6 +170,10 @@ function nightMode() {
   	}
 
   }
+}
+
+function notification(){
+	var checkBoxnote = document.getElementById("noteCheck");
 }
 
 function changeConcertDay(side){
@@ -291,7 +335,7 @@ function pop() {
 function move() {
 
 
-		
+		var checkBoxnote = document.getElementById("noteCheck");
     	var elem = document.getElementById("myBar"); 
     	var width = 1;
     	
@@ -300,8 +344,13 @@ function move() {
  
     	function frame() {
         	if (width >= 100) {
-        		playAudio();
-        		pop();
+        		
+        		if(noteCheck.checked==true){
+        			
+        			pop();
+        			playAudio();
+        		}
+        		
         		
         		functionIsRunning = false;
             	clearInterval(id);
@@ -318,16 +367,119 @@ function move() {
 
 }
 
-
-
 function multiple(){
-    change('TakeAway', 'Progress', '1');
+    change('CheckOrder', 'Progress', '1')
 
     if(functionIsRunning !=true ){
+    	var date = new Date();
+    	var h = date.getHours();
+    	var m = date.getMinutes();
+    	m=m+50;
+    	if(m>60){
+    		h++;
+    		m=m-60;
+    	}
+    	m = checkTime(m);
+    	document.getElementById("ordertime").innerHTML = h + ":" + m;
+    	document.getElementById("ordertime").style.fontSize = "11px";
+		document.getElementById("ordertime").style.color = "white";
+		document.getElementById("ordertime").style.fontWeight = "bold";
     	functionIsRunning = true;
     	move();
     	
     }
 }
 
+//fastFood functionality functions
 
+function minusValue(name){
+	var i;
+	for(i = 0; i < 5; i++) {
+		if(name == foodNames[i]){
+			if(foodValue[i] == 0) return;
+			foodValue[i]--;
+			var x = foodValue[i].toString();
+			document.getElementById(name).innerHTML = x;
+		}
+	}
+
+	for(i = 0; i < 5; i++) {
+		if(name == drinkNames[i]){
+			if(drinkValue[i] == 0) return;
+			drinkValue[i]--;
+			var x = drinkValue[i].toString();
+			document.getElementById(name).innerHTML = x;
+		}
+	}
+}
+
+function plusValue(name){
+	var i;
+	for(i = 0; i < 5; i++) {
+		if(name == foodNames[i]){
+			if(foodValue[i] == 99) return;
+			foodValue[i]++;
+			var x = foodValue[i].toString();
+			document.getElementById(name).innerHTML = x;
+		}
+	}
+
+	for(i = 0; i < 5; i++) {
+		if(name == drinkNames[i]){
+			if(drinkValue[i] == 99) return;
+			drinkValue[i]++;
+			var x = drinkValue[i].toString();
+			document.getElementById(name).innerHTML = x;
+		}
+	}
+}
+
+function resetValues(name){
+	var i;
+
+	for(i = 0; i < 5; i ++){
+		if(name == "Food"){
+			foodValue[i] = 0;
+			document.getElementById(foodNames[i]).innerHTML = "0";
+		}
+		else{
+			drinkValue[i] = 0;
+			document.getElementById(drinkNames[i]).innerHTML = "0";
+		} 
+	}
+}
+
+
+function writeOrder(){
+	var i;
+	for(i = 0; i < 5; i++){
+		if(foodValue[i] != 0){
+			var id = "carrinho" + foodNames[i];
+			document.getElementById(id).style.display = "block";
+			id += "Qt";
+			document.getElementById(id).style.display = "block";
+			document.getElementById(id).innerHTML = foodValue[i].toString();
+		}
+	}
+
+	for(i = 0; i < 5; i++){
+		if(drinkValue[i] != 0){
+			var id = "carrinho" + drinkNames[i];
+			document.getElementById(id).style.display = "block";
+			id += "Qt";
+			document.getElementById(id).style.display = "block";
+			document.getElementById(id).innerHTML = drinkValue[i].toString();
+		}
+	}
+}
+
+function clearOrder(){
+	var i;
+	for(i = 0; i < 5; i++){
+		var id = "carrinho";
+		document.getElementById(id + foodNames[i]).style.display = "none";
+		document.getElementById(id + foodNames[i] + "Qt").style.display = "none";
+		document.getElementById(id + drinkNames[i]).style.display = "none";
+		document.getElementById(id + drinkNames[i] + "Qt").style.display = "none";
+	}
+}

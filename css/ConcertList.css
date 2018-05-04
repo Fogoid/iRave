@@ -4,13 +4,27 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
-
 .foodclsScroll{
     width: 115px;
-    height: 80px;
+    height: 55px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+#kek {
+    width: 115px;
+    height: 50px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#cancel, #confirm {
+    width: 57.5px;
+    height: 20px;
+}
+
+
+
 
 ::-webkit-scrollbar{
     width: 5px;
