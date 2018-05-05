@@ -13,10 +13,17 @@ var drinkNames = [ "Água", "Coca-Cola", "SuperBock", "IceTea", "7-Up" ];
 var foodValue = [ 0, 0, 0, 0, 0];
 var	drinkValue = [ 0, 0, 0, 0, 0];
 
+function resetStack(){
+	while(stackTo.length != 0)
+		stackTo.pop();
+	while(stackFrom.length != 0)
+		stackFrom.pop();
+}
+
 function returnTo(){
 	change('Verify', last, 0);
 	stackFrom.push(last);
-	stackTo.push(TakeAway);
+	stackTo.push('TakeAway');
 }
 
 function goBack(){
@@ -57,9 +64,8 @@ function change(a, b, c){
 			resetValues('Food');
 			resetValues('Drinks');
 			clearOrder();
-
+			resetStack();
 		}
-
 
 		document.getElementById("descriptionText").style.visibility = "hidden";
 	}
@@ -78,10 +84,14 @@ function change(a, b, c){
 			break;
 		case 'TakeAway':
 			if(a == 'Verify' && last == "Food"){
+				resetStack();
 				resetValues('Food');
+				insert('mainMenu', 'TakeAway');
 			}
 			if(a == 'Verify' && last == "Drinks")
+				resetStack();
 				resetValues('Drinks');
+				insert('mainMenu', 'TakeAway');
 			break;
 		case 'CheckOrder':
 			writeOrder();
@@ -319,22 +329,22 @@ function changeEventZone(side){
 
 
 
+//fastFood functionality functions
 
 function playAudio() { 
 	var x = document.getElementById("myAudio");
     x.play(); 
 } 
+
 var order=false;
+
 function pop() {
 	order=true;
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
+	var last = stackFrom[stackFrom.length - 1];
+    change(last, 'Notification', '1');
 }
 
-
 function move() {
-
-
 		var checkBoxnote = document.getElementById("noteCheck");
     	var elem = document.getElementById("myBar"); 
     	var width = 1;
@@ -342,35 +352,33 @@ function move() {
     	var id = setInterval(frame, 50);
     
  
-    	function frame() {
-        	if (width >= 100) {
-        		
-        		if(noteCheck.checked==true){
-        			
-        			pop();
-        			playAudio();
-        		}
-        		
-        		
-        		functionIsRunning = false;
-            	clearInterval(id);
+	function frame() {
+    	if (width >= 100) {
+    		
+    		if(noteCheck.checked==true){
+    			
+    			pop();
+    			playAudio();
+    		}
+    		
+    		
+    		functionIsRunning = false;
+        	clearInterval(id);
 
-        	} else {
-            	width++; 
-            	elem.style.width = width + '%'; 
-            	elem.innerHTML = width * 1 + '%';
-        	}
-
+    	} else {
+        	width++; 
+        	elem.style.width = width + '%'; 
+        	elem.innerHTML = width * 1 + '%';
     	}
-    	
- 	
+
+	}
 
 }
 
 function multiple(){
     change('CheckOrder', 'Progress', '1')
-
-    if(functionIsRunning !=true ){
+    console.log(functionIsRunning);
+    if(functionIsRunning != true){
     	var date = new Date();
     	var h = date.getHours();
     	var m = date.getMinutes();
@@ -386,11 +394,8 @@ function multiple(){
 		document.getElementById("ordertime").style.fontWeight = "bold";
     	functionIsRunning = true;
     	move();
-    	
     }
 }
-
-//fastFood functionality functions
 
 function minusValue(name){
 	var i;
@@ -449,7 +454,6 @@ function resetValues(name){
 	}
 }
 
-
 function writeOrder(){
 	var i;
 	for(i = 0; i < 5; i++){
@@ -483,3 +487,5 @@ function clearOrder(){
 		document.getElementById(id + drinkNames[i] + "Qt").style.display = "none";
 	}
 }
+
+//Finder Functionality
