@@ -7,12 +7,21 @@ var cols = document.getElementsByClassName('screen');
 var last;
 
 
-//fastFood functionality Vars
+// fastFood functionality Vars
 var foodNames = [ "Bifana", "Burguer", "Cachorro", "Prato Dia", "Especial" ];
 var drinkNames = [ "Água", "Coca-Cola", "SuperBock", "IceTea", "7-Up" ];
 var foodValue = [ 0, 0, 0, 0, 0];
 var	drinkValue = [ 0, 0, 0, 0, 0];
 
+// Finder functionality Vars
+var friendsNumbers = new Array();
+var friendsNames = new Array();
+var numberOfFriends = 0;
+var newFriend = [0, 0, 0, 0, 0];
+var names = [ "Alberto", "Jaquim", "Manel", "Maria", "Zé"];
+var surnames = [ "Beterraba", "das Motas", "Alforneles", "Emília", "Couves"];
+
+// Program's core functions
 function resetStack(){
 	while(stackTo.length != 0)
 		stackTo.pop();
@@ -45,6 +54,8 @@ function insert(a, b){
 function change(a, b, c){
 	document.getElementById(a).style.display = "none";
 	document.getElementById(b).style.display = "block";
+
+	console.log("a: " + a + " b: " + b);
 	
 	if( b != 'mainMenu') {
 		document.getElementById("descriptionText").innerHTML = b;
@@ -88,13 +99,20 @@ function change(a, b, c){
 				resetValues('Food');
 				insert('mainMenu', 'TakeAway');
 			}
-			if(a == 'Verify' && last == "Drinks")
+			if(a == 'Verify' && last == 'Drinks'){
 				resetStack();
 				resetValues('Drinks');
 				insert('mainMenu', 'TakeAway');
+			}
 			break;
 		case 'CheckOrder':
 			writeOrder();
+			break;
+		case 'AddFriend':
+			resetNumber();
+			break;
+		case 'RemoveFriend':
+			displayFriends();
 			break;
 	}
 
@@ -164,6 +182,8 @@ function checkDate(i){
 	}
 }
 
+// Program's settings menu functions
+
 function nightMode() {
   var cols = document.getElementsByClassName('screen');
   var checkBox = document.getElementById("nightCheck");
@@ -185,6 +205,8 @@ function nightMode() {
 function notification(){
 	var checkBoxnote = document.getElementById("noteCheck");
 }
+
+// Squedule's app functions
 
 function changeConcertDay(side){
 	if(document.getElementById("1 A").style.display != 'none'){
@@ -327,8 +349,6 @@ function changeEventZone(side){
 }
 
 
-
-
 //fastFood functionality functions
 
 function playAudio() { 
@@ -447,10 +467,11 @@ function resetValues(name){
 			foodValue[i] = 0;
 			document.getElementById(foodNames[i]).innerHTML = "0";
 		}
-		else{
-			drinkValue[i] = 0;
-			document.getElementById(drinkNames[i]).innerHTML = "0";
-		} 
+		else
+			if(name == "Drinks"){
+				drinkValue[i] = 0;
+				document.getElementById(drinkNames[i]).innerHTML = "0";
+			} 
 	}
 }
 
@@ -489,3 +510,107 @@ function clearOrder(){
 }
 
 //Finder Functionality
+
+function incrementNumber(x){
+	if(newFriend[x] == 9) return;
+	newFriend[x]++;
+	changeNumber(x);
+}
+
+function decrementNumber(x){
+	if(newFriend[x] == 0) return;
+	newFriend[x]--;
+	changeNumber(x);
+}
+
+function changeNumber(x){
+	document.getElementById("number" + x.toString()).innerHTML = newFriend[x].toString();
+}
+
+function resetNumber(){
+	var t;
+	for(t = 0; t < 5; t++){
+		newFriend[t] = 0;
+		changeNumber(t);
+	}
+}
+
+function checkNumber(){
+	var friendNumber = getFriendNumber();
+	for(t = 0; t < numberOfFriends; t++){
+		if(friendNumber == friendsNumbers[t])
+			return false;
+	}
+}
+
+function getFriendNumber(){
+	var friendNumber = "";
+	var t;
+	for(t = 0; t < 5; t++){
+		friendNumber += newFriend[t].toString()
+	}
+	return friendNumber;
+}
+
+function addFriend(){
+	if(checkNumber() == false){
+		change("AddFriend", "Duplicate", "1");
+		return;
+	}
+
+	var x = Math.floor((Math.random() * 100) + 1);
+	
+	if(x > 30){
+		var friendNumber = getFriendNumber();
+		var friendName = getRandomName();
+		friendsNumbers.push(friendNumber);
+		friendsNames.push(friendName);
+		numberOfFriends++;
+		change("AddFriend", "Success", "1");
+	}
+	else
+		change("AddFriend", "Unsuccess", "1");
+}
+
+
+function confirm(x){
+	document.getElementById("removeName").innerHTML = friendsNames[x] + "?";
+	document.getElementById("confirmBtn").onclick = function() { removeFriend(x) };
+	change("RemoveFriend", "Confirm", '1');
+}
+
+function removeFriend(x){
+	var t;
+	for(t = x; t < numberOfFriends - 1; t++){
+		friendsNumbers[t] = friendsNumbers[t+1];
+		friendsNames[t] = friendsNames[t+1];
+	}
+	numberOfFriends--;
+	friendsNumbers.pop();
+	friendsNames.pop();
+	goBack();
+}
+
+function displayFriends(){
+	var namesHtml = "";
+	var removeHtml = "";
+	var t;
+	
+	for(t = 0; t < numberOfFriends; t++){
+		namesHtml += "<p style='width:100%; height:30%'>" + friendsNames[t] + "</p>";
+		removeHtml += "<p class='alignMiddle' style='width:100%; height:30%; color: red' onclick='confirm(" + t.toString() + ")'>X</p>";
+	}
+
+	document.getElementById("FriendsNames").innerHTML = namesHtml;
+	document.getElementById("removeFriends").innerHTML = removeHtml;
+}
+
+function getRandomName(){
+    var x;
+    var y;
+    var name;
+    x = Math.floor((Math.random() * 5));
+    y = Math.floor((Math.random() * 5));
+    name = names[x] + " " + surnames[y];
+    return name;
+}
