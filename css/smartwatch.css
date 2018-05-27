@@ -130,6 +130,15 @@ span {
     background-color: #0f84dd;
 }
 
+.DetailsBtn{
+    height:60%; 
+    width:65%; 
+    border: 1px solid #0f45b8; 
+    border-radius: 5px;
+    background-color: #0f84dd;
+    display: none;
+}
+
 .addFriend {
     height: 100%;
     width: 20%;
@@ -139,4 +148,15 @@ span {
 
 .plusMinus {
     color: orange;
+}
+
+#mapa{
+    z-index: 1; 
+}
+
+#friends{
+    z-index: 2;
+    position: absolute;
+overflow: hidden
+
 }

@@ -16,10 +16,13 @@ var	drinkValue = [ 0, 0, 0, 0, 0];
 // Finder functionality Vars
 var friendsNumbers = new Array();
 var friendsNames = new Array();
+var friendsCoordsX = new Array();
+var friendsCoordsY = new Array();
 var numberOfFriends = 0;
 var newFriend = [0, 0, 0, 0, 0];
-var names = [ "Alberto", "Jaquim", "Manel", "Maria", "Zé"];
-var surnames = [ "Beterraba", "das Motas", "Alforneles", "Emília", "Couves"];
+var names = [ "Luis", "Jaquim", "Manel", "Maria", "Zé"];
+var surnames = [ "Silves", "Mota", "Silva", "Emília", "Couves"];
+var myCoords = [0, 0];
 
 // Program's core functions
 function resetStack(){
@@ -114,6 +117,17 @@ function change(a, b, c){
 		case 'RemoveFriend':
 			displayFriends();
 			break;
+		case 'FriendsGPS':
+			writeCoordsOnMap();
+			break;
+		case 'SpotGPS':
+			writeMeOnMap();
+			break;
+		case 'NeedsGPS':
+			writeMeOnMap();
+		case 'Location':
+			resetLocationDetails();
+			break;
 	}
 
 	if(a == 'CheckOrder'){
@@ -138,12 +152,15 @@ function startTime() {
 		    document.getElementById("time").innerHTML = h + ":" + m;
 		    document.getElementById("date").innerHTML = d + " de " + mon + ", " + y;
 		    var t = setTimeout(startTime, 500);
+		   
 		    
 		    if(!i){ 
+		    	randomcoords();
 		    	document.getElementById("time").style.fontSize = "30px";
 				document.getElementById("time").style.color = "orange";
 				document.getElementById("time").style.fontWeight = "bold";
 		    	document.getElementById("date").style.fontSize = "9px";
+		    	getRandomId();
 				++i;
 			}
 }
@@ -206,6 +223,15 @@ function notification(){
 	var checkBoxnote = document.getElementById("noteCheck");
 }
 
+function changemultiple(a,b,c){
+	change(a,b,c);
+	if(b=='OtherEvents'){
+		changeEventZone('right');
+	}
+	if(b=='Concerts'){
+		changeConcertStage('right');
+	}
+}
 // Squedule's app functions
 
 function changeConcertDay(side){
@@ -565,6 +591,8 @@ function addFriend(){
 		var friendName = getRandomName();
 		friendsNumbers.push(friendNumber);
 		friendsNames.push(friendName);
+		friendsCoordsX.push(0);
+		friendsCoordsY.push(0);
 		numberOfFriends++;
 		change("AddFriend", "Success", "1");
 	}
@@ -584,10 +612,14 @@ function removeFriend(x){
 	for(t = x; t < numberOfFriends - 1; t++){
 		friendsNumbers[t] = friendsNumbers[t+1];
 		friendsNames[t] = friendsNames[t+1];
+		friendsCoordsY[t] = friendsCoordsY[t+1];
+		friendsCoordsX[t] = friendsCoordsX[t+1];
 	}
 	numberOfFriends--;
 	friendsNumbers.pop();
 	friendsNames.pop();
+	friendsCoordsY.pop();
+	friendsCoordsY.pop();
 	goBack();
 }
 
@@ -613,4 +645,87 @@ function getRandomName(){
     y = Math.floor((Math.random() * 5));
     name = names[x] + " " + surnames[y];
     return name;
+}
+function getmylocation(){
+	var x=generateRandom(5,95);
+	var y=generateRandom(5,55);
+	myCoords[0] = x;
+	myCoords[1] = y;
+}
+
+function generateRandom(min, max) {
+  var number = Math.floor(Math.random() * (max - min)) ;
+  return number;
+}
+
+function writeMeOnMap(){
+	var location =  "<img src='img/my-local.png' id='friends' draggable='false' style='top:"+myCoords[1].toString()+"px ;left:"+myCoords[0].toString() +"px;' >";
+	document.getElementById("spotMyLocal").innerHTML = location;
+	document.getElementById("needsMyLocal").innerHTML = location;
+}
+
+function writeCoordsOnMap(){
+	var location = "<img src='img/my-local.png' id='friends' draggable='false' style='top:"+myCoords[1].toString()+"px ;left:"+myCoords[0].toString() +"px;' >";
+	for(t=0; t<numberOfFriends; t++){
+		var x = friendsCoordsX[t];
+		var y = friendsCoordsY[t];
+		location+="<img src='img/user-local.png' id='friends' draggable='false' onclick='" + 'getFriendName(' + t + ")' style='top:"+y.toString()+"px ;left:"+x.toString() +"px;' >";
+	}
+	
+	document.getElementById("friendslocal").innerHTML = location;
+}
+
+function randomcoords(){
+	var k = setTimeout(randomcoords, 10000);
+	var length;
+	var t;
+	var location = getmylocation();
+	for(t=0; t<numberOfFriends; t++){
+		var x=generateRandom(5,95);
+		var y=generateRandom(5,55);
+		friendsCoordsX[t] = x;
+		friendsCoordsY[t] = y;
+	}
+}
+
+function getDetails(Spot){
+	var details = "";
+	switch(Spot){
+		case 'G':
+			details = 'Green Zone';
+			document.getElementById('SpotDetails').onclick = function() { change('SpotGPS', 'OtherEvents', '1') };
+			break;
+		case 'P':
+			details = 'Pool Zone';
+			document.getElementById('SpotDetails').onclick = function() { changemultiple('SpotGPS', 'OtherEvents', '1') };
+			break;
+		case 'A':
+			details = 'Stage A';
+			document.getElementById('SpotDetails').onclick = function() { change('SpotGPS', 'Concerts', '1') };
+			break;
+		case 'B':
+			details = 'Stage B';
+			document.getElementById('SpotDetails').onclick = function() { changemultiple('SpotGPS', 'Concerts', '1') };
+			break;
+	}
+	document.getElementById('SpotDetails').innerHTML = details;
+	document.getElementById('SpotDetails').style.display = 'block';
+}
+
+function getFriendName(x){
+	document.getElementById("friend-name").innerHTML = friendsNames[x];
+}
+
+function resetLocationDetails(){
+	document.getElementById("friend-name").innerHTML = "";
+	document.getElementById('SpotDetails').style.display = "none";
+}
+
+function getRandomId(){
+	var t;
+	var id = "";
+	for(t =  0; t < 5; t++){
+		id += Math.floor(Math.random()*9 + 1).toString();
+	}
+	document.getElementById("myId").innerHTML = "My id: " + id;
 }

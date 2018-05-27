@@ -152,7 +152,7 @@
                     </div>
                     <div class="w3-cell-row" >
                     	<div class="w3-cell-row" style="height:10%"> 
-                    		<p id="Stage" style="font-size:11px;text-align: center;font-weight: bold ;color:lightblue; ">Stage A</p>
+                    		<p id="Stage" style="font-size:11px;text-align: center;font-weight: bold ;color:lightblue; "onclick="change('Concerts','Find',1)";>Stage A</p>
                     	</div>
                     	<div class=" clsScroll" style="height:80% width:110%">
 							<div class="w3-cell-row" id="1 A">
@@ -248,7 +248,7 @@
                     </div>
                     <div class="w3-cell-row" >
                     	<div class="w3-cell-row" style="height:10%"> 
-                    		<p id="Zone" style="font-size:11px;text-align: center;font-weight: bold ; color:lightblue;">Green Zone</p>
+                    		<p id="Zone" style="font-size:11px;text-align: center;font-weight: bold ; color:lightblue;"onclick="change('OtherEvents','Find',1)";>Green Zone</p>
                     	</div>
                     	<div class=" clsScroll" style="height:80% width:110%">
 							<div class="w3-cell-row" id="1 G">
@@ -394,7 +394,7 @@
 	  						</div>
 	  					</div>
                     	<div class="w3-cell-row w3-display-container" style="height:25%"> 
-							<span class="ContBtn w3-display-middle" onclick="change('Food','TakeAway','0')">Next</span>
+							<span class="ContBtn w3-display-middle" onclick="change('Food','TakeAway','0')">Add</span>
                     	</div>	    							
 					</div>
 				</div>
@@ -440,7 +440,7 @@
 	  					</div>
 
                     	<div class="w3-cell-row w3-display-container" style="height:25%"> 
-							<span class="ContBtn w3-display-middle" onclick="change('Drinks','TakeAway','0')">Next</span>
+							<span class="ContBtn w3-display-middle" onclick="change('Drinks','TakeAway','0')">Add</span>
                     	</div>		    							
 					</div>
 				</div>
@@ -508,21 +508,24 @@
 
                 <!-- Finder Functionality -->
                 <div id="Finder" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+                	<div class="w3-cell-row w3-display-container" style="width:100%; height:15%">
+                		<p id="myId" style="height:100%; width:100%; text-align: center"></p>
+                	</div>
                 	<div class="w3-cell-row" style="width: 100%; height: 50%">
 						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
 							<button class="w3-button w3-circle w3-blue w3-display-bottommiddle" style="background:url('img/user.png') no-repeat center; width:32px; height:32px;"onclick="change('Finder', 'Friends', '1')"></button>
 						</div>
 						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
-							<button class="w3-button w3-circle w3-cyan w3-display-bottommiddle" style="background:url('img/map-marker.png') no-repeat center; width:32px; height:32px;" onclick="change('Finder', 'Find', '1')"></button>
+							<button class="w3-button w3-circle w3-cyan w3-display-bottommiddle" style="background:url('img/map-marker.png') no-repeat center; width:32px; height:32px;" onclick="change('Finder', 'Location', '1')"></button>
 						</div>
 					</div>
 
-					<div class="w3-cell-row" style="width: 100%; height: 50%">
+					<div class="w3-cell-row" style="width: 100%; height: 35%">
 						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
 							<span class="w3-display-topmiddle">Manage Friends</span>
 						</div>
 						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
-							<span class="w3-display-topmiddle">Find</span>
+							<span class="w3-display-topmiddle">Location</span>
 						</div>
 					</div>
 				</div>
@@ -579,19 +582,80 @@
 				
 				<div id="RemoveFriend" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
 						<div class="kek" style="height:120% width:110%">
-							<div class="w3-cell-row" id="description">
+							<div class="big w3-cell-row" id="description">
 	  							<div id="FriendsNames" class="w3-cell" style="width:85%; font-weight: bold;"></div>
 	  							<div id="removeFriends" class="w3-cell" style="width:15%"></div>
                     		</div>
                     	</div>
 				</div>
+ 	 
+				<div id="Location" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+					<div class="w3-cell-row" style="width: 100%; height: 35%">
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<button class="w3-button w3-circle w3-purple w3-display-bottommiddle" style="background:url('img/spot-local.png') no-repeat center; width:32px; height:32px;"onclick="change('Location', 'SpotGPS', '1')"></button>
+						</div>
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<button class="w3-button w3-circle w3-orange w3-display-bottommiddle" style="background:url('img/friends-local.png') no-repeat center; width:32px; height:32px;" onclick="change('Location', 'FriendsGPS', '1')"></button>
+						</div>
+					</div>
 
-				<div id="Find" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
-					
+					<div class="w3-cell-row" style="width: 100%; height: 15%">
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<span class="w3-display-topmiddle">Activities</span>
+						</div>
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<span class="w3-display-topmiddle">Friends</span>
+						</div>
+					</div>
+
+					<div class="w3-cell-row" style="width: 100%; height: 35%">
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<button class="w3-button w3-circle w3-green w3-display-bottommiddle" style="background:url('img/hungry-man.png') no-repeat center; width:32px; height:32px;" onclick="change('Location', 'NeedsGPS', '1')"></button>
+						</div>
+					</div>	
+
+					<div class="w3-cell-row" style="width: 100%; height: 15%">
+						<div class="w3-cell w3-display-container" style="width: 50%; height: 100%">
+							<span class="w3-display-topmiddle">Needs</span>
+						</div>
+					</div>		
 				</div>
 
+				<div id="SpotGPS" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+					<div class="w3-cell-row" style="width: 100%; height: 75%">
+						<div class=" hvscroll">
+							<img  src="img/mapa.png" id="mapa" usemap="maptotal" draggable="false" style="height: 100%;width:100%">
+							<map name="maptotal">
+								<area shape="rect" coords="75,6,100,25" onclick="getDetails('A')">
+ 								<area shape="rect" coords="15,40,40,70" onclick="getDetails('B')">
+ 								<area shape="circle" coords="20,20,15" onclick="getDetails('G')">
+ 								<area shape="circle" coords="90,60,15" onclick="getDetails('P')">
+							</map>
+							<div id="spotMyLocal" style="width: 100%; height:100%"></div>
+						</div>
+					</div>	
+					<div class="w3-cell-row w3-display-container" style="width:100%">
+						<span id="SpotDetails" class="DetailsBtn" style="margin-left: 22px"></span>
+					</div>
+				</div>
 
-
+				<div id="FriendsGPS" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+					<div class="w3-cell-row w3-display-container" style="width: 100%; height: 80%; ">
+						<div  class=" hvscroll" style="height:100%;width: 100%; background-image: url('img/mapa.png');">
+							<div id="friendslocal" style="height: 100%;width: 100% "></div>
+						</div>
+					</div>
+					<div class="w3-cell-row w3-display-container">
+						<p class="w3-display-middle" id="friend-name" style="height:100%; width:100%" align=middle></p>
+					</div>					
+				</div>
+				<div id="NeedsGPS" class="w3-cell-row w3-display-container" style="height:85%;  display: none">
+					<div class="w3-display-container" style="width: 100%; height: 100%; ">
+						<div  class=" hvscroll" style="height:100%;width: 100%; background-image: url('img/mapa-wc.png');">
+							<div id="needsMyLocal" style="height: 100%;width: 100% "></div>
+						</div>
+					</div>					
+				</div>				
                 <!-- Verification/Notification Screens --> 
                 <div class="w3-cell-row" id="Verification" style="height:85%;  display: none">
                 	<div class="w3-cell-row" style="width: 100%; height: 72%">
